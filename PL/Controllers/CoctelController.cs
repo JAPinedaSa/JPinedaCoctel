@@ -66,6 +66,7 @@ namespace PL.Controllers
                 responseTask.Wait();
                 
                 var result = responseTask.Result;
+
                 if (result.IsSuccessStatusCode)
                 {
                     var readTask = result.Content.ReadAsStringAsync();
