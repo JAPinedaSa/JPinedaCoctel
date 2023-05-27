@@ -74,7 +74,7 @@ namespace PL.Controllers
                     //var readTask = result.Content.ReadAsStreamAsync();
                     readTask.Wait();
                     
-                    foreach ( var resultItem in readTask.Result)
+                    foreach ( var resultItem in readTask.Result.ToArray())
                     {
                         ML.Coctel resultItemList = Newtonsoft.Json.JsonConvert.DeserializeObject<ML.Coctel>(resultItem.ToString());
                         resultWebApi.Objects.Add(resultItemList);
