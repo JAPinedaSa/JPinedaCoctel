@@ -10,6 +10,7 @@ namespace ML
     public class Coctel
     {
         public string idDrink { get; set; }
+        public string IG { get; set; }
         public string strDrink { get; set; }
         public string strDrinkAlternate { get; set; }
         public string strTags { get; set; }
@@ -29,6 +30,7 @@ namespace ML
 
         public string strInstructionsZHHANT { get; set; }
         public string strDrinkThumb { get; set; }
+        public string strIngredient { get; set; }
         public string strIngredient1 { get; set; }
         public string strIngredient2 { get; set; }
         public string strIngredient3 { get; set; }
@@ -62,8 +64,13 @@ namespace ML
         public string strImageSource { get; set; }
         public string strImageAttribution { get; set; }
         public string strCreativeCommonsConfirmed { get; set; }
-        public string dateModified { get; set; }
+        public Ingredientes Ingredientess { get; set; }
 
+        public string dateModified { get; set; }
+        public string Direccion = "https://www.thecocktaildb.com/images/ingredients/";
+        public string extencion = ".png";
         public List<object> cocteles { get; set; }
+        public List<object> drinks { get; set; }
+  
     }
 }

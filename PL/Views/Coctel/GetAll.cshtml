@@ -1,0 +1,120 @@
+﻿@model ML.Coctel
+@{
+    ViewData["Title"] = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container ">
+
+ 
+    <div class=row>
+        <div class="text-center">
+            <h2>COCTELES</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Cocteles Alcoholicos con letra A Modelo</h5>
+            <hr />
+        </div>
+    </div>
+    @*BARRA DE BUSQUEDA POR NOMBRE*@
+    <div class="row">
+
+        <div class="col-md-12">
+
+            @using (Html.BeginForm("GetAll", "Coctel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                //Nombres y Apellidos
+                <div class="row">
+
+
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.strDrink)
+
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa-solid fa-user-pen" style="color: #000000;"></i></span>
+                            @Html.TextBoxFor(model => model.strDrink, new { @class = "form-control", @id = "txtNombre", @onkeypress = "SoloLetras(event,'txtNombre','lblNombre')"})
+
+                            @Html.Label(null, "", new{@id="lblNombre"})
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.strIngredient)
+
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa-solid fa-user-pen" style="color: #000000;"></i></span>
+                            @Html.TextBoxFor(model => model.strIngredient, new { @class = "form-control", @id = "txtFecha", @onkeypress = "SoloLetras(event,'txtNombre','lblNombre')"})
+
+                            @Html.Label(null, "", new{@id="lblNombre"})
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+                <br />
+                //BOTONE DE BUSCAR
+                <div class="row">
+
+                    <div class="col text-center">
+                        <input type="submit" value="Buscar" class="btn btn-success" />
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>
+    @*BOTON QUE LLEVA AL FORMULARIO*@
+    <div style="float:right;">
+        @Html.ActionLink("Agregar nuevo lIbro", "Form", "Libro", htmlAttributes: new { @class = "btn btn-success" })
+    </div>
+    <br />
+    <br />
+    <div class="row">
+        @foreach (ML.Coctel coctel in Model.cocteles)
+        {
+
+            <div style=" width: 20rem;">
+                <div class="card text-center">
+                    @if (coctel.strDrinkThumb == null || coctel.strDrinkThumb == " ")
+                    {
+
+                        <img src="/image/Usuario.jpg" class="card-img-top" style="height:350px;">
+                    }
+                    else
+                    {
+                        <img src="@coctel.strDrinkThumb" class="card-img-top" style="height:350px;">
+                    }
+
+                    <div class="card-body" style="height:250px;">
+                        <h5 class="card-title">@coctel.strDrink </h5>
+                        <p class="card-text">
+                            Categoria: @coctel.strCategory <br />
+                            Contenido Alcoholico: @coctel.strAlcoholic <br />
+                            Contenido de Azucar: @coctel.strGlass
+                        </p>
+                        <p class="card-text">
+                            Ingrediente: @coctel.strIngredient1 <br />
+                            Medida: @coctel.strMeasure1 <br />
+                            <img src="@coctel.Direccion@coctel.strIngredient1@coctel.extencion" style="height:50px; weight:50px;">
+                        </p>
+
+                       <a class="btn btn-2 btn-info glyphicon" href="@Url.Action("IngredientesGetByCoctel", "Coctel", new { idCoctel = coctel.idDrink })"><i class="bi bi-pencil-square" style="color: ivory"></i>Detalles</a>
+
+                        <a class="btn btn-2 btn-danger glyphicon" href="@Url.Action("Delete", "Libro", new { IdLibro= coctel.idDrink})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"><i class="bi bi-eraser-fill" style="color: mintcream"></i>Eliminar</a>
+                    </div>
+                </div>
+                <br />
+
+                 <br /> <br /> <br /> <br /> <br /> <br />
+            </div>
+        }
+    </div>
+
+</div>
